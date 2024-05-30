@@ -1,4 +1,4 @@
-import { createToken, EmbeddedActionsParser, Lexer } from "npm:chevrotain";
+import { createToken, EmbeddedActionsParser, Lexer } from "chevrotain";
 
 const LF = createToken({ name: "LF", pattern: "\n", label: "\\n" });
 const Equal = createToken({ name: "Equal", pattern: "=", label: "'='" });

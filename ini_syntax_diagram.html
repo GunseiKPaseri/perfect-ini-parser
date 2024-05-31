@@ -1,0 +1,548 @@
+
+<!-- This is a generated file -->
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+  body {
+    background-color: hsl(30, 20%, 95%)
+  }
+</style>
+
+
+<link rel='stylesheet' href='https://unpkg.com/chevrotain@11.0.3/diagrams/diagrams.css'>
+
+<script src='https://unpkg.com/chevrotain@11.0.3/diagrams/vendor/railroad-diagrams.js'></script>
+<script src='https://unpkg.com/chevrotain@11.0.3/diagrams/src/diagrams_builder.js'></script>
+<script src='https://unpkg.com/chevrotain@11.0.3/diagrams/src/diagrams_behavior.js'></script>
+<script src='https://unpkg.com/chevrotain@11.0.3/diagrams/src/main.js'></script>
+
+<div id="diagrams" align="center"></div>    
+
+<script>
+    window.serializedGrammar = [
+  {
+    "type": "Rule",
+    "name": "ini",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Repetition",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "ignoreLine",
+            "idx": 0
+          }
+        ]
+      },
+      {
+        "type": "Repetition",
+        "idx": 1,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "section",
+            "idx": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "section",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "sectionHeaderLine",
+        "idx": 0
+      },
+      {
+        "type": "Repetition",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "ignoreLine",
+            "idx": 1
+          }
+        ]
+      },
+      {
+        "type": "Repetition",
+        "idx": 1,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "keyValueLine",
+            "idx": 1
+          },
+          {
+            "type": "Repetition",
+            "idx": 2,
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "ignoreLine",
+                "idx": 2
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "sectionHeaderLine",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "spaces",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "LSquare",
+        "label": "'['",
+        "idx": 0,
+        "pattern": "["
+      },
+      {
+        "type": "NonTerminal",
+        "name": "sectionName",
+        "idx": 1
+      },
+      {
+        "type": "Terminal",
+        "name": "RSquare",
+        "label": "']'",
+        "idx": 1,
+        "pattern": "]"
+      },
+      {
+        "type": "NonTerminal",
+        "name": "spaces",
+        "idx": 2
+      },
+      {
+        "type": "Terminal",
+        "name": "LF",
+        "label": "\\n",
+        "idx": 2,
+        "pattern": "\n"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "sectionName",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "RepetitionMandatory",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "sectionChar",
+            "idx": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "sectionChar",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "commentMark",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "Space",
+                "label": "' ' | \\t",
+                "idx": 0,
+                "pattern": "[\\x20\\t]"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "Equal",
+                "label": "'='",
+                "idx": 0,
+                "pattern": "="
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "OtherChar",
+                "label": "OtherChar",
+                "idx": 0,
+                "pattern": "[^=\\[\\]#;\\n\\x20\\t]"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "ignoreLine",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "spaces",
+        "idx": 0
+      },
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "commentLF",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "LF",
+                "label": "\\n",
+                "idx": 0,
+                "pattern": "\n"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "commentLF",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "commentMark",
+        "idx": 1
+      },
+      {
+        "type": "NonTerminal",
+        "name": "valueLF",
+        "idx": 2
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "valueLF",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "spaces",
+        "idx": 0
+      },
+      {
+        "type": "Repetition",
+        "idx": 2,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "anyChar",
+            "idx": 0
+          }
+        ]
+      },
+      {
+        "type": "Terminal",
+        "name": "LF",
+        "label": "\\n",
+        "idx": 0,
+        "pattern": "\n"
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "keyValueLine",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "spaces",
+        "idx": 0
+      },
+      {
+        "type": "NonTerminal",
+        "name": "key",
+        "idx": 0
+      },
+      {
+        "type": "Terminal",
+        "name": "Equal",
+        "label": "'='",
+        "idx": 0,
+        "pattern": "="
+      },
+      {
+        "type": "NonTerminal",
+        "name": "valueLF",
+        "idx": 1
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "key",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "NonTerminal",
+        "name": "keyHeadChar",
+        "idx": 0
+      },
+      {
+        "type": "Repetition",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "NonTerminal",
+            "name": "keyChar",
+            "idx": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "commentMark",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "Semicoron",
+                "label": "';'",
+                "idx": 0,
+                "pattern": ";"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "NumberSign",
+                "label": "'#'",
+                "idx": 0,
+                "pattern": "#"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "spaces",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Repetition",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Terminal",
+            "name": "Space",
+            "label": "' ' | \\t",
+            "idx": 0,
+            "pattern": "[\\x20\\t]"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "keyHeadChar",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "RSquare",
+                "label": "']'",
+                "idx": 0,
+                "pattern": "]"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "OtherChar",
+                "label": "OtherChar",
+                "idx": 0,
+                "pattern": "[^=\\[\\]#;\\n\\x20\\t]"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "keyChar",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "commentMark",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "LSquare",
+                "label": "'['",
+                "idx": 0,
+                "pattern": "["
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "Space",
+                "label": "' ' | \\t",
+                "idx": 0,
+                "pattern": "[\\x20\\t]"
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "keyHeadChar",
+                "idx": 0
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "Rule",
+    "name": "anyChar",
+    "orgText": "",
+    "definition": [
+      {
+        "type": "Alternation",
+        "idx": 0,
+        "definition": [
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "NonTerminal",
+                "name": "keyChar",
+                "idx": 0
+              }
+            ]
+          },
+          {
+            "type": "Alternative",
+            "definition": [
+              {
+                "type": "Terminal",
+                "name": "Equal",
+                "label": "'='",
+                "idx": 0,
+                "pattern": "="
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+];
+</script>
+
+<script>
+    var diagramsDiv = document.getElementById("diagrams");
+    main.drawDiagramsFromSerializedGrammar(serializedGrammar, diagramsDiv);
+</script>

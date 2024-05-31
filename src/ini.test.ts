@@ -238,6 +238,8 @@ describe("success ini stringify", () => {
 const tinyTestcase: [string, string][] = [
   ["CRLF ini", "[hoge]\rfuga=piyo\r"],
   ["LF ini", "[hoge]\r\nfuga=piyo\r\n"],
+  ["empty value", "[hoge]\nfuga=\npiyo=foo"],
+  ["semicolon value", "[hoge]\nfuga=hoge;fuga\npiyo=foo"],
 ];
 
 describe("success ini regenerate", () => {

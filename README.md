@@ -2,9 +2,9 @@
 
 A parser that allows editing while _maintaining the structure_ of ini.
 
-- support comment (';' '#')
+- support comment (`';'` `'#'`)
 - support CRLF
-- support order retenation ( minimal change)
+- support order retenation ( minimal change )
 
 > [!WARNING]
 >
@@ -34,3 +34,8 @@ console.log(editedIni);
 // ; comment
 // fuga=momo
 ```
+
+## Internals
+
+[chevrotain](https://chevrotain.io/) is used for parsing.
+Syntax diagram can be seen from [ini_sytax_diagram.html](./ini_syntax_diagram.html)
